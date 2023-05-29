@@ -1,7 +1,7 @@
+using HotelBooking.Database;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using pracapiapp.DB;
 using pracapiapp.Repositories;
 using System.Text;
 
@@ -20,7 +20,7 @@ builder.Services.AddControllers().AddNewtonsoftJson(Options =>
 });
 
 
-builder.Services.AddDbContext<HotelResDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<HotelResDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("Connection")));
 
 builder.Services.AddScoped<IHotelRepository, HotelRepository>();
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();

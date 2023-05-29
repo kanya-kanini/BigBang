@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HotelBooking.Database;
+using HotelBooking.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using pracapiapp.DB;
-using pracapiapp.Models;
 
 namespace pracapiapp.Controllers
 {
@@ -23,7 +23,7 @@ namespace pracapiapp.Controllers
             _context = context;
         }
 
-        // GET: api/Customers
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
         {
@@ -34,7 +34,7 @@ namespace pracapiapp.Controllers
             return await _context.Customers.ToListAsync();
         }
 
-        // GET: api/Customers/5
+       
         [HttpGet("{id}")]
         public async Task<ActionResult<Customer>> GetCustomer(int id)
         {
@@ -52,8 +52,7 @@ namespace pracapiapp.Controllers
             return customer;
         }
 
-        // PUT: api/Customers/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCustomer(int id, Customer customer)
         {
@@ -83,8 +82,7 @@ namespace pracapiapp.Controllers
             return NoContent();
         }
 
-        // POST: api/Customers
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        
         [HttpPost]
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
         {
@@ -98,7 +96,7 @@ namespace pracapiapp.Controllers
             return CreatedAtAction("GetCustomer", new { id = customer.CustomerId }, customer);
         }
 
-        // DELETE: api/Customers/5
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCustomer(int id)
         {

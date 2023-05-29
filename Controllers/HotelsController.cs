@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using HotelBooking.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using pracapiapp.Models;
 using pracapiapp.Repositories;
+using System;
 
 namespace pracapiapp.Controllers
 {
@@ -28,7 +29,7 @@ namespace pracapiapp.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return HandleException(ex);
             }
         }
 
@@ -46,7 +47,7 @@ namespace pracapiapp.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return HandleException(ex);
             }
         }
 
@@ -64,7 +65,7 @@ namespace pracapiapp.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return HandleException(ex);
             }
         }
 
@@ -86,7 +87,7 @@ namespace pracapiapp.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return HandleException(ex);
             }
         }
 
@@ -104,9 +105,13 @@ namespace pracapiapp.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return HandleException(ex);
             }
         }
-    }
 
+        private IActionResult HandleException(Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        }
+    }
 }

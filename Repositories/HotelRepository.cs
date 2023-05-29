@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using pracapiapp.DB;
-using pracapiapp.Models;
+﻿using HotelBooking.Database;
+using HotelBooking.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace pracapiapp.Repositories
 {
@@ -22,9 +22,9 @@ namespace pracapiapp.Repositories
                 await projectcontext.SaveChangesAsync();
                 return del;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -36,9 +36,9 @@ namespace pracapiapp.Repositories
                     Include(x => x.Staffs)
                      .Include(x => x.Customers).ToListAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -51,10 +51,8 @@ namespace pracapiapp.Repositories
                                                   .Include(x => x.Customers)
                                                   .FirstOrDefaultAsync(x => x.HotelId == id);
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            catch (Exception) 
+            { throw; }
         }
 
         public async Task<Hotel> PostHotelsAsync(Hotel hotel)
@@ -65,10 +63,7 @@ namespace pracapiapp.Repositories
                 await projectcontext.SaveChangesAsync();
                 return hotel;
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            catch (Exception) { throw; }
         }
 
         public async Task<Hotel> PutHotelAsync(int id, Hotel hotel)
@@ -79,10 +74,7 @@ namespace pracapiapp.Repositories
                 await projectcontext.SaveChangesAsync();
                 return hotel;
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            catch (Exception) { throw; }
         }
     }
 }

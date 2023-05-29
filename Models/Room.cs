@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace pracapiapp.Models
+namespace HotelBooking.Models
 {
     public class Room
     {
@@ -15,7 +15,7 @@ namespace pracapiapp.Models
         [Range(1, 10)]
         public int? RoomCapacity { get; set; }
 
-        public string? RoomAvailability {get; set; }
+        public string? RoomAvailability { get; set; }
         public int HotelId { get; set; }
 
 

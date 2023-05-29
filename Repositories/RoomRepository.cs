@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using pracapiapp.DB;
-using pracapiapp.Models;
+﻿using HotelBooking.Database;
+using HotelBooking.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace pracapiapp.Repositories
 {

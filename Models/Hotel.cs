@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace pracapiapp.Models
+namespace HotelBooking.Models
 {
     public class Hotel
     {

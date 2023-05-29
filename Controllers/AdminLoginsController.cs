@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HotelBooking.Database;
+using HotelBooking.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using pracapiapp.DB;
-using pracapiapp.Models;
 
 namespace pracapiapp.Controllers
 {
@@ -21,7 +21,7 @@ namespace pracapiapp.Controllers
             _context = context;
         }
 
-        // GET: api/AdminLogins
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AdminLogin>>> GetAdminLogin()
         {
@@ -32,7 +32,7 @@ namespace pracapiapp.Controllers
             return await _context.AdminLogin.ToListAsync();
         }
 
-        // GET: api/AdminLogins/5
+     
         [HttpGet("{id}")]
         public async Task<ActionResult<AdminLogin>> GetAdminLogin(int id)
         {
@@ -50,8 +50,7 @@ namespace pracapiapp.Controllers
             return adminLogin;
         }
 
-        // PUT: api/AdminLogins/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAdminLogin(int id, AdminLogin adminLogin)
         {
@@ -81,8 +80,7 @@ namespace pracapiapp.Controllers
             return NoContent();
         }
 
-        // POST: api/AdminLogins
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        
         [HttpPost]
         public async Task<ActionResult<AdminLogin>> PostAdminLogin(AdminLogin adminLogin)
         {
@@ -96,7 +94,7 @@ namespace pracapiapp.Controllers
             return CreatedAtAction("GetAdminLogin", new { id = adminLogin.AdminId }, adminLogin);
         }
 
-        // DELETE: api/AdminLogins/5
+       
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAdminLogin(int id)
         {

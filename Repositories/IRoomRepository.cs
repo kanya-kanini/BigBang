@@ -1,4 +1,4 @@
-﻿using pracapiapp.Models;
+﻿using HotelBooking.Models;
 
 namespace pracapiapp.Repositories
 {

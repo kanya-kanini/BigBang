@@ -1,9 +1,9 @@
-﻿namespace pracapiapp.Models
+﻿namespace HotelBooking.Models
 {
     public class AdminLogin
     {
         [System.ComponentModel.DataAnnotations.Key]
-        public int  AdminId { get; set; }
+        public int AdminId { get; set; }
         public string? AdminName { get; set; }
         public string? Password { get; set; }
         public string? Email { get; set; }

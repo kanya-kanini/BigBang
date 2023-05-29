@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using pracapiapp.Models;
+﻿using HotelBooking.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace pracapiapp.DB
+namespace HotelBooking.Database
 {
     public class HotelResDbContext : DbContext
     {

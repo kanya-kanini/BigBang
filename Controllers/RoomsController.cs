@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using HotelBooking.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using pracapiapp.DB;
-using pracapiapp.Models;
 using pracapiapp.Repositories;
 
 namespace pracapiapp.Controllers
@@ -24,74 +17,114 @@ namespace pracapiapp.Controllers
             _roomRepository = roomRepository;
         }
 
-        // GET: api/Rooms
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
         {
-            var rooms = await _roomRepository.GetAllRooms();
-            return Ok(rooms);
+            try
+            {
+                var rooms = await _roomRepository.GetAllRooms();
+                return Ok(rooms);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving rooms.");
+            }
         }
 
-        // GET: api/Rooms/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Room>> GetRoom(int id)
         {
-            var room = await _roomRepository.GetRoomById(id);
-            if (room == null)
-                return NotFound();
+            try
+            {
+                var room = await _roomRepository.GetRoomById(id);
+                if (room == null)
+                    return NotFound();
 
-            return Ok(room);
+                return Ok(room);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving the room.");
+            }
         }
 
-        // PUT: api/Rooms/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRoom(int id, Room room)
         {
-            if (id != room.RoomId)
-                return BadRequest();
+            try
+            {
+                if (id != room.RoomId)
+                    return BadRequest();
 
-            if (!_roomRepository.RoomExists(id))
-                return NotFound();
+                if (!_roomRepository.RoomExists(id))
+                    return NotFound();
 
-            await _roomRepository.UpdateRoom(room);
-            return NoContent();
+                await _roomRepository.UpdateRoom(room);
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while updating the room.");
+            }
         }
 
-        // POST: api/Rooms
         [HttpPost]
         public async Task<ActionResult<Room>> PostRoom(Room room)
         {
-            await _roomRepository.CreateRoom(room);
-            return CreatedAtAction("GetRoom", new { id = room.RoomId }, room);
+            try
+            {
+                await _roomRepository.CreateRoom(room);
+                return CreatedAtAction("GetRoom", new { id = room.RoomId }, room);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while creating the room.");
+            }
         }
 
-        // DELETE: api/Rooms/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRoom(int id)
         {
-            if (!_roomRepository.RoomExists(id))
-                return NotFound();
+            try
+            {
+                if (!_roomRepository.RoomExists(id))
+                    return NotFound();
 
-            await _roomRepository.DeleteRoom(id);
-            return NoContent();
+                await _roomRepository.DeleteRoom(id);
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while deleting the room.");
+            }
         }
 
-        // GET: api/Rooms/Hotel/5/Availability/Available
         [HttpGet("Hotel/{hotelId}/Availability/{availability}")]
         public async Task<ActionResult<IEnumerable<Room>>> GetRoomsByHotelAndAvailability(int hotelId, string availability)
         {
-            var rooms = await _roomRepository.GetRoomsByHotelAndAvailability(hotelId, availability);
-            return Ok(rooms);
+            try
+            {
+                var rooms = await _roomRepository.GetRoomsByHotelAndAvailability(hotelId, availability);
+                return Ok(rooms);
+            }
+            catch (Exception )
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving rooms by hotel and availability.");
+            }
         }
 
-        // GET: api/Rooms/Hotel/5/AvailableCount
         [HttpGet("Hotel/{hotelId}/AvailableCount")]
         public async Task<ActionResult<int>> GetAvailableRoomCountByHotel(int hotelId)
         {
-            var count = await _roomRepository.GetAvailableRoomCountByHotel(hotelId);
-            return Ok(count);
+            try
+            {
+                var count = await _roomRepository.GetAvailableRoomCountByHotel(hotelId);
+                return Ok(count);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving the available room count by hotel.");
+            }
         }
     }
-
-
 }

@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using HotelBooking.Database;
+using HotelBooking.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using pracapiapp.DB;
-using pracapiapp.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -22,10 +22,7 @@ namespace pracapiapp.Controllers
             _configuration = config;
             _context = context;
         }
-        /* public int UserId { get; set; }
-         public string? UserName { get; set; }
-         public string? Password { get; set; }
-         public string? Email { get; set; }*/
+       
         [HttpPost]
         public async Task<IActionResult> Post(AdminLogin _userData)
         {
@@ -35,7 +32,7 @@ namespace pracapiapp.Controllers
 
                 if (user != null)
                 {
-                    //create claims details based on the user information
+                  
                     var claims = new[] {
                         new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
